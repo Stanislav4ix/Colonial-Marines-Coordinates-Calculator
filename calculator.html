@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Terminal Interface</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+body {
+    margin: 0;
+    background: #050a06;
+    color: #39ff88;
+    font-family: 'Share Tech Mono', monospace;
+    overflow: hidden;
+}
+
+/* CRT overlay */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.15),
+        rgba(0,0,0,0.15) 1px,
+        transparent 1px,
+        transparent 3px
+    );
+    pointer-events: none;
+    mix-blend-mode: multiply;
+}
+
+/* flicker */
+@keyframes flicker {
+    0% { opacity: 0.98; }
+    50% { opacity: 1; }
+    100% { opacity: 0.97; }
+}
+
+.terminal {
+    padding: 30px;
+    animation: flicker 0.15s infinite;
+}
+
+/* header */
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 1px solid #39ff88;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.logo {
+    font-size: 28px;
+    letter-spacing: 8px;
+}
+
+.sub {
+    font-size: 12px;
+    opacity: 0.7;
+}
+
+/* sections */
+.block {
+    margin-bottom: 25px;
+}
+
+.title {
+    color: #7dffb0;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+input {
+    background: transparent;
+    border: 1px solid #39ff88;
+    color: #39ff88;
+    padding: 8px;
+    margin: 5px 0;
+    width: 220px;
+    display: block;
+}
+
+button {
+    margin-top: 10px;
+    background: transparent;
+    border: 1px solid #39ff88;
+    color: #39ff88;
+    padding: 8px 15px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #39ff88;
+    color: #000;
+}
+
+/* log */
+.log {
+    font-size: 12px;
+    opacity: 0.9;
+    white-space: pre-line;
+}
+
+.cursor::after {
+    content: "_";
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    50% { opacity: 0; }
+}
+
+/* footer */
+.footer {
+    position: absolute;
+    bottom: 10px;
+    width: 100%;
+    text-align: center;
+    font-size: 11px;
+    opacity: 0.5;
+}
+</style>
+</head>
+
+<body>
+
+<div class="terminal">
+
+    <!-- HEADER -->
+    <div class="header">
+        <div class="logo">We-Ya-PTAI</div>
+        <div class="sub">PERSONAL TERMINAL ACCESS INTERFACE</div>
+    </div>
+
+    <!-- CALIBRATION MODULE -->
+    <div class="block">
+        <div class="title">Calibration Module</div>
+
+        <input id="wx" placeholder="Webmap X">
+        <input id="wy" placeholder="Webmap Y">
+        <input id="gx" placeholder="Game X">
+        <input id="gy" placeholder="Game Y">
+
+        <button onclick="calibrate()">RUN CALIBRATION</button>
+
+        <div class="log" id="calLog"></div>
+    </div>
+
+    <!-- MAP DATABASE MODULE -->
+    <div class="block">
+        <div class="title">Map Database Access</div>
+
+        <div class="log" id="mapLog">SELECT OPERATIONAL MAP:</div>
+
+        <button onclick="openMap('shivas')">SHIVAS SNOWBALL</button>
+        <button onclick="openMap('solaris')">SOLARIS RIDGE</button>
+        <button onclick="openMap('fiorina')">FIORINA SCIENCE ANNEX</button>
+        <button onclick="openMap('kutjevo')">KUTJEVO REFINERY</button>
+        <button onclick="openMap('lv522')">LV-522 - CHANCE'S CLAIM</button>
+        <button onclick="openMap('newvaradero')">NEW VARADERO</button>
+        <button onclick="openMap('lv624')">LV-624</button>
+    </div>
+
+    <!-- COORDINATE MODULE -->
+    <div class="block">
+        <div class="title">Coordinate Translation</div>
+
+        <input id="tx" placeholder="Target Web X">
+        <input id="ty" placeholder="Target Web Y">
+
+        <button onclick="convert()">EXECUTE</button>
+
+        <div class="log cursor" id="out">AWAITING INPUT...</div>
+    </div>
+
+</div>
+
+<div class="footer">(C) SIMULATED CORPORATE SYSTEM</div>
+
+<script>
+
+let dx = 0;
+let dy = 0;
+
+/* calibration */
+function calibrate() {
+    const wx = +document.getElementById("wx").value;
+    const wy = +document.getElementById("wy").value;
+    const gx = +document.getElementById("gx").value;
+    const gy = +document.getElementById("gy").value;
+
+    dx = gx - wx;
+    dy = gy - wy;
+
+    document.getElementById("calLog").innerText =
+        "[OK] CALIBRATION COMPLETE\n" +
+        "[INFO] OFFSET X: " + dx + "\n" +
+        "[INFO] OFFSET Y: " + dy;
+}
+
+/* coordinate conversion */
+function convert() {
+    const tx = +document.getElementById("tx").value;
+    const ty = +document.getElementById("ty").value;
+
+    const rx = tx + dx;
+    const ry = ty + dy;
+
+    document.getElementById("out").innerText =
+        "[TRANSLATION SUCCESS]\n" +
+        "COORDINATES: (" + rx + ", " + ry + ")";
+}
+
+/* map database */
+function openMap(id) {
+    const maps = {
+        shivas: "https://webmap.affectedarc07.co.uk/maps/cm/shivas/",
+        solaris: "https://webmap.affectedarc07.co.uk/maps/cm/solaris/",
+        fiorina: "https://webmap.affectedarc07.co.uk/maps/cm/fiorina/",
+        kutjevo: "https://webmap.affectedarc07.co.uk/maps/cm/kutjevo/",
+        lv522: "https://webmap.affectedarc07.co.uk/maps/cm/lv522/",
+        newvaradero: "https://webmap.affectedarc07.co.uk/maps/cm/newvaradero/",
+        lv624: "https://webmap.affectedarc07.co.uk/maps/cm/lv624/"
+    };
+
+    window.open(maps[id], "_blank");
+
+    document.getElementById("mapLog").innerText =
+        "[ACCESS GRANTED]\nLOADING MAP: " + id.toUpperCase();
+}
+
+</script>
+
+</body>
+</html>
