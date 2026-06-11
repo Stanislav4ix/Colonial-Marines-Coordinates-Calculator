@@ -108,6 +108,17 @@ button:hover {
     white-space: pre-line;
 }
 
+/* bigger output terminal */
+#out {
+    font-size: 14px;
+    min-height: 90px;
+    padding: 12px;
+    border: 1px solid #39ff88;
+    margin-top: 10px;
+    background: rgba(0, 0, 0, 0.25);
+}
+
+/* blinking cursor */
 .cursor::after {
     content: "_";
     animation: blink 1s infinite;
@@ -142,6 +153,10 @@ button:hover {
     <!-- CALIBRATION MODULE -->
     <div class="block">
         <div class="title">Calibration Module</div>
+
+        <div style="font-size:12px; opacity:0.75; margin-bottom:10px;">
+            You must determine coordinates from identical points on the web map and in-game, then enter them into the corresponding fields.
+        </div>
 
         <input id="wx" placeholder="Webmap X">
         <input id="wy" placeholder="Webmap Y">
