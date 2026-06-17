@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,14 +16,14 @@ body {
     overflow: hidden;
 }
 
-/* CRT overlay */
 body::before {
     content: "";
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+
     background: repeating-linear-gradient(
         to bottom,
         rgba(0,0,0,0.15),
@@ -30,114 +31,191 @@ body::before {
         transparent 1px,
         transparent 3px
     );
-    pointer-events: none;
-    mix-blend-mode: multiply;
+
+    pointer-events:none;
+    mix-blend-mode:multiply;
 }
 
-/* flicker */
 @keyframes flicker {
-    0% { opacity: 0.98; }
-    50% { opacity: 1; }
-    100% { opacity: 0.97; }
+
+0% {opacity:0.98;}
+50% {opacity:1;}
+100% {opacity:0.97;}
+
 }
 
 .terminal {
-    padding: 30px;
-    animation: flicker 0.15s infinite;
+
+padding:30px;
+animation:flicker 0.15s infinite;
+
 }
 
-/* header */
 .header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid #39ff88;
-    padding-bottom: 15px;
-    margin-bottom: 20px;
+
+display:flex;
+align-items:center;
+justify-content:space-between;
+
+border-bottom:1px solid #39ff88;
+
+padding-bottom:15px;
+margin-bottom:20px;
+
 }
 
 .logo {
-    font-size: 28px;
-    letter-spacing: 8px;
+
+font-size:28px;
+letter-spacing:8px;
+
 }
 
 .sub {
-    font-size: 12px;
-    opacity: 0.7;
+
+font-size:12px;
+opacity:0.7;
+
 }
 
-/* sections */
 .block {
-    margin-bottom: 25px;
+
+margin-bottom:25px;
+
 }
 
 .title {
-    color: #7dffb0;
-    margin-bottom: 10px;
-    text-transform: uppercase;
+
+color:#7dffb0;
+margin-bottom:10px;
+text-transform:uppercase;
+
+}
+
+.input-group {
+
+margin-bottom:10px;
+
 }
 
 input {
-    background: transparent;
-    border: 1px solid #39ff88;
-    color: #39ff88;
-    padding: 8px;
-    margin: 5px 0;
-    width: 220px;
-    display: block;
+
+background:transparent;
+border:1px solid #39ff88;
+color:#39ff88;
+
+padding:8px;
+margin:5px 0;
+
+width:220px;
+
+display:block;
+
+}
+
+.adjust-buttons {
+
+display:flex;
+gap:4px;
+margin-bottom:6px;
+
+}
+
+.adjust-buttons button {
+
+padding:4px 7px;
+font-size:10px;
+margin-top:0;
+
 }
 
 button {
-    margin-top: 10px;
-    background: transparent;
-    border: 1px solid #39ff88;
-    color: #39ff88;
-    padding: 8px 15px;
-    cursor: pointer;
+
+margin-top:10px;
+
+background:transparent;
+
+border:1px solid #39ff88;
+
+color:#39ff88;
+
+padding:8px 15px;
+
+cursor:pointer;
+
 }
 
 button:hover {
-    background: #39ff88;
-    color: #000;
+
+background:#39ff88;
+color:#000;
+
 }
 
-/* log */
 .log {
-    font-size: 12px;
-    opacity: 0.9;
-    white-space: pre-line;
+
+font-size:12px;
+opacity:0.9;
+white-space:pre-line;
+
 }
 
-/* bigger output terminal */
 #out {
-    font-size: 22px;
-    min-height: 120px;
-    padding: 16px;
-    border: 1px solid #39ff88;
-    margin-top: 10px;
-    background: rgba(0, 0, 0, 0.35);
-    white-space: pre-line;
-    letter-spacing: 1px;
+
+font-size:22px;
+
+min-height:120px;
+
+padding:16px;
+
+border:1px solid #39ff88;
+
+margin-top:10px;
+
+background:rgba(0,0,0,0.35);
+
+white-space:pre-line;
+
+letter-spacing:1px;
+
 }
 
-/* blinking cursor */
+.copy-buttons {
+
+display:flex;
+gap:10px;
+flex-wrap:wrap;
+margin-top:10px;
+
+}
+
 .cursor::after {
-    content: "_";
-    animation: blink 1s infinite;
+
+content:"_";
+animation:blink 1s infinite;
+
 }
 
 @keyframes blink {
-    50% { opacity: 0; }
+
+50% {opacity:0;}
+
 }
 
-/* footer */
 .footer {
-    position: absolute;
-    bottom: 10px;
-    width: 100%;
-    text-align: center;
-    font-size: 11px;
-    opacity: 0.5;
+
+position:absolute;
+
+bottom:10px;
+
+width:100%;
+
+text-align:center;
+
+font-size:11px;
+
+opacity:0.5;
+
 }
 </style>
 </head>
@@ -146,114 +224,340 @@ button:hover {
 
 <div class="terminal">
 
-    <!-- HEADER -->
-    <div class="header">
-        <div class="logo">We-Ya-PTAI</div>
-        <div class="sub">PERSONAL TERMINAL ACCESS INTERFACE</div>
-    </div>
+<div class="header">
 
-    <!-- CALIBRATION MODULE -->
-    <div class="block">
-        <div class="title">Calibration Module</div>
+<div class="logo">We-Ya-PTAI</div>
 
-        <div style="font-size:12px; opacity:0.75; margin-bottom:10px;">
-            You must determine coordinates from identical points on the web map and in-game, then enter them into the corresponding fields.
-        </div>
-
-        <input id="wx" placeholder="Webmap X">
-        <input id="wy" placeholder="Webmap Y">
-        <input id="gx" placeholder="Game X">
-        <input id="gy" placeholder="Game Y">
-
-        <button onclick="calibrate()">RUN CALIBRATION</button>
-
-        <div class="log" id="calLog"></div>
-    </div>
-
-    <!-- MAP DATABASE MODULE -->
-    <div class="block">
-        <div class="title">Map Database Access</div>
-
-        <div class="log" id="mapLog">SELECT OPERATIONAL MAP:</div>
-
-        <button onclick="openMap('shivas')">SHIVAS SNOWBALL</button>
-        <button onclick="openMap('solaris')">SOLARIS RIDGE</button>
-        <button onclick="openMap('fiorina')">FIORINA SCIENCE ANNEX</button>
-        <button onclick="openMap('kutjevo')">KUTJEVO REFINERY</button>
-        <button onclick="openMap('lv522')">LV-522 - CHANCE'S CLAIM</button>
-        <button onclick="openMap('newvaradero')">NEW VARADERO</button>
-        <button onclick="openMap('lv624')">LV-624</button>
-    </div>
-
-    <!-- COORDINATE MODULE -->
-    <div class="block">
-        <div class="title">Coordinate Translation</div>
-
-        <input id="tx" placeholder="Target Web X">
-        <input id="ty" placeholder="Target Web Y">
-
-        <button onclick="convert()">EXECUTE</button>
-
-        <div class="log cursor" id="out">AWAITING INPUT...</div>
-    </div>
+<div class="sub">
+PERSONAL TERMINAL ACCESS INTERFACE
+</div>
 
 </div>
 
-<div class="footer">(C) SIMULATED CORPORATE SYSTEM</div>
+<div class="block">
+
+<div class="title">
+Calibration Module
+</div>
+
+<div style="font-size:12px; opacity:0.75; margin-bottom:10px;">
+
+You must determine coordinates from identical points on the web map and in-game, then enter them into the corresponding fields.
+
+</div>
+
+<div class="input-group">
+
+<input id="wx" placeholder="Webmap X">
+
+<div class="adjust-buttons">
+
+<button onclick="adjust('wx',-10)">-10</button>
+<button onclick="adjust('wx',-5)">-5</button>
+<button onclick="adjust('wx',-1)">-1</button>
+<button onclick="adjust('wx',1)">+1</button>
+<button onclick="adjust('wx',5)">+5</button>
+<button onclick="adjust('wx',10)">+10</button>
+
+</div>
+
+</div>
+
+<div class="input-group">
+
+<input id="wy" placeholder="Webmap Y">
+
+<div class="adjust-buttons">
+
+<button onclick="adjust('wy',-10)">-10</button>
+<button onclick="adjust('wy',-5)">-5</button>
+<button onclick="adjust('wy',-1)">-1</button>
+<button onclick="adjust('wy',1)">+1</button>
+<button onclick="adjust('wy',5)">+5</button>
+<button onclick="adjust('wy',10)">+10</button>
+
+</div>
+
+</div>
+
+<div class="input-group">
+
+<input id="gx" placeholder="Game X">
+
+<div class="adjust-buttons">
+
+<button onclick="adjust('gx',-10)">-10</button>
+<button onclick="adjust('gx',-5)">-5</button>
+<button onclick="adjust('gx',-1)">-1</button>
+<button onclick="adjust('gx',1)">+1</button>
+<button onclick="adjust('gx',5)">+5</button>
+<button onclick="adjust('gx',10)">+10</button>
+
+</div>
+
+</div>
+
+<div class="input-group">
+
+<input id="gy" placeholder="Game Y">
+
+<div class="adjust-buttons">
+
+<button onclick="adjust('gy',-10)">-10</button>
+<button onclick="adjust('gy',-5)">-5</button>
+<button onclick="adjust('gy',-1)">-1</button>
+<button onclick="adjust('gy',1)">+1</button>
+<button onclick="adjust('gy',5)">+5</button>
+<button onclick="adjust('gy',10)">+10</button>
+
+</div>
+
+</div>
+
+<button onclick="calibrate()">
+
+RUN CALIBRATION
+
+</button>
+
+<div class="log" id="calLog"></div>
+
+</div>
+
+<div class="block">
+
+<div class="title">
+Map Database Access
+</div>
+
+<div class="log" id="mapLog">
+
+SELECT OPERATIONAL MAP:
+
+</div>
+
+<button onclick="openMap('shivas')">
+SHIVAS SNOWBALL
+</button>
+
+<button onclick="openMap('solaris')">
+SOLARIS RIDGE
+</button>
+
+<button onclick="openMap('fiorina')">
+FIORINA SCIENCE ANNEX
+</button>
+
+<button onclick="openMap('kutjevo')">
+KUTJEVO REFINERY
+</button>
+
+<button onclick="openMap('lv522')">
+LV-522 - CHANCE'S CLAIM
+</button>
+
+<button onclick="openMap('newvaradero')">
+NEW VARADERO
+</button>
+
+<button onclick="openMap('lv624')">
+LV-624
+</button>
+
+</div>
+
+<div class="block">
+
+<div class="title">
+
+Coordinate Translation
+
+</div>
+
+<div class="input-group">
+
+<input id="tx" placeholder="Target Web X">
+
+<div class="adjust-buttons">
+
+<button onclick="adjust('tx',-10)">-10</button>
+<button onclick="adjust('tx',-5)">-5</button>
+<button onclick="adjust('tx',-1)">-1</button>
+<button onclick="adjust('tx',1)">+1</button>
+<button onclick="adjust('tx',5)">+5</button>
+<button onclick="adjust('tx',10)">+10</button>
+
+</div>
+
+</div>
+
+<div class="input-group">
+
+<input id="ty" placeholder="Target Web Y">
+
+<div class="adjust-buttons">
+
+<button onclick="adjust('ty',-10)">-10</button>
+<button onclick="adjust('ty',-5)">-5</button>
+<button onclick="adjust('ty',-1)">-1</button>
+<button onclick="adjust('ty',1)">+1</button>
+<button onclick="adjust('ty',5)">+5</button>
+<button onclick="adjust('ty',10)">+10</button>
+
+</div>
+
+</div>
+
+<button onclick="convert()">
+
+EXECUTE
+
+</button>
+
+<div class="log cursor" id="out">
+
+AWAITING INPUT...
+
+</div>
+
+<div class="copy-buttons">
+
+<button onclick="copyAll()">
+COPY ALL
+</button>
+
+<button onclick="copyX()">
+COPY X
+</button>
+
+<button onclick="copyY()">
+COPY Y
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="footer">
+
+(C) SIMULATED CORPORATE SYSTEM
+
+</div>
 
 <script>
 
-let dx = 0;
-let dy = 0;
+let dx=0;
+let dy=0;
 
-/* calibration */
-function calibrate() {
-    const wx = +document.getElementById("wx").value;
-    const wy = +document.getElementById("wy").value;
-    const gx = +document.getElementById("gx").value;
-    const gy = +document.getElementById("gy").value;
+let lastX=0;
+let lastY=0;
 
-    dx = gx - wx;
-    dy = gy - wy;
+function adjust(id,amount){
 
-    document.getElementById("calLog").innerText =
-        "[OK] CALIBRATION COMPLETE\n" +
-        "[INFO] OFFSET X: " + dx + "\n" +
-        "[INFO] OFFSET Y: " + dy;
+const input=document.getElementById(id);
+
+let value=parseInt(input.value);
+
+if(isNaN(value))
+value=0;
+
+input.value=value+amount;
+
 }
 
-/* coordinate conversion */
-function convert() {
-    const tx = +document.getElementById("tx").value;
-    const ty = +document.getElementById("ty").value;
+function calibrate(){
 
-    const rx = tx + dx;
-    const ry = ty + dy;
+const wx=+document.getElementById("wx").value;
+const wy=+document.getElementById("wy").value;
 
-    document.getElementById("out").innerText =
-        "[TRANSLATION SUCCESS]\n" +
-        "COORDINATES: (" + rx + ", " + ry + ")";
+const gx=+document.getElementById("gx").value;
+const gy=+document.getElementById("gy").value;
+
+dx=gx-wx;
+dy=gy-wy;
+
+document.getElementById("calLog").innerText=
+
+"[OK] CALIBRATION COMPLETE\n"+
+"[INFO] OFFSET X: "+dx+"\n"+
+"[INFO] OFFSET Y: "+dy;
+
 }
 
-/* map database */
-function openMap(id) {
-    const maps = {
-        shivas: "https://webmap.affectedarc07.co.uk/maps/cm/shivas/",
-        solaris: "https://webmap.affectedarc07.co.uk/maps/cm/solaris/",
-        fiorina: "https://webmap.affectedarc07.co.uk/maps/cm/fiorina/",
-        kutjevo: "https://webmap.affectedarc07.co.uk/maps/cm/kutjevo/",
-        lv522: "https://webmap.affectedarc07.co.uk/maps/cm/lv522/",
-        newvaradero: "https://webmap.affectedarc07.co.uk/maps/cm/newvaradero/",
-        lv624: "https://webmap.affectedarc07.co.uk/maps/cm/lv624/"
-    };
+function convert(){
 
-    window.open(maps[id], "_blank");
+const tx=+document.getElementById("tx").value;
+const ty=+document.getElementById("ty").value;
 
-    document.getElementById("mapLog").innerText =
-        "[ACCESS GRANTED]\nLOADING MAP: " + id.toUpperCase();
+lastX=tx+dx;
+lastY=ty+dy;
+
+document.getElementById("out").innerText=
+
+"[TRANSLATION SUCCESS]\n"+
+"COORDINATES: ("+lastX+", "+lastY+")";
+
+}
+
+function copyAll(){
+
+navigator.clipboard.writeText(
+"("+lastX+", "+lastY+")"
+);
+
+}
+
+function copyX(){
+
+navigator.clipboard.writeText(
+lastX.toString()
+);
+
+}
+
+function copyY(){
+
+navigator.clipboard.writeText(
+lastY.toString()
+);
+
+}
+
+function openMap(id){
+
+const maps={
+
+shivas:"https://webmap.affectedarc07.co.uk/maps/cm/shivas/",
+
+solaris:"https://webmap.affectedarc07.co.uk/maps/cm/solaris/",
+
+fiorina:"https://webmap.affectedarc07.co.uk/maps/cm/fiorina/",
+
+kutjevo:"https://webmap.affectedarc07.co.uk/maps/cm/kutjevo/",
+
+lv522:"https://webmap.affectedarc07.co.uk/maps/cm/lv522/",
+
+newvaradero:"https://webmap.affectedarc07.co.uk/maps/cm/newvaradero/",
+
+lv624:"https://webmap.affectedarc07.co.uk/maps/cm/lv624/"
+
+};
+
+window.open(
+maps[id],
+"_blank"
+);
+
+document.getElementById("mapLog").innerText=
+
+"[ACCESS GRANTED]\nLOADING MAP: "+id.toUpperCase();
+
 }
 
 </script>
 
 </body>
 </html>
+```
